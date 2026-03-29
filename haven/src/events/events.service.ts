@@ -43,7 +43,13 @@ export class EventsService {
     if (body.extraEvents?.moduleBeginUuid) {
       queries.push(
         this.prismaService.module_begin_events.upsert({
-          where: { uuid: body.extraEvents.moduleBeginUuid },
+          where: {
+            user_id_course_id_module_id: {
+              user_id: userId,
+              course_id: body.courseId,
+              module_id: body.moduleId,
+            },
+          },
           update: { timestamp: new Date(body.timestamp) },
           create: {
             ...baseEvent,
@@ -57,7 +63,13 @@ export class EventsService {
     if (body.extraEvents?.moduleCompleteUuid) {
       queries.push(
         this.prismaService.module_complete_events.upsert({
-          where: { uuid: body.extraEvents.moduleCompleteUuid },
+          where: {
+            user_id_course_id_module_id: {
+              user_id: userId,
+              course_id: body.courseId,
+              module_id: body.moduleId,
+            },
+          },
           update: { timestamp: new Date(body.timestamp) },
           create: {
             ...baseEvent,
