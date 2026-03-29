@@ -52,7 +52,7 @@ const _request = async (
     return result;
   } catch (error) {
     console.error(`API request failed: ${req.method} ${url}`, error);
-    return null;
+    throw error;
   }
 };
 

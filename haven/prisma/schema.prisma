@@ -117,6 +117,9 @@ model module_begin_events {
 
   module modules @relation(fields: [module_id], references: [id])
   user   users   @relation(fields: [user_id], references: [id])
+
+  @@unique([user_id, course_id, module_id])
+  @@index([user_id, course_id])
 }
 
 model module_complete_events {
@@ -130,6 +133,9 @@ model module_complete_events {
 
   module modules @relation(fields: [module_id], references: [id])
   user   users   @relation(fields: [user_id], references: [id])
+
+  @@unique([user_id, course_id, module_id])
+  @@index([user_id, course_id])
 }
 
 model course_complete_events {
